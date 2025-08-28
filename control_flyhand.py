@@ -212,5 +212,5 @@ class FlyingHandController:
         print("\nExiting...")
 
 if __name__ == "__main__":
-    controller = FlyingHandController()
+    controller = FlyingHandController('scene.xml')
     controller.run()

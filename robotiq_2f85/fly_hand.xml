@@ -1,5 +1,5 @@
 <mujoco model="robotiq_2f85">
-  <compiler angle="radian" meshdir="assets" autolimits="true"/>
+  <!-- <compiler angle="radian" meshdir="robotiq_2f85/assets" autolimits="true"/> -->
 
   <option cone="elliptic" impratio="10"/>
 
@@ -9,14 +9,14 @@
     <material name="gray" rgba="0.4627 0.4627 0.4627 1"/>
     <material name="black" rgba="0.149 0.149 0.149 1"/>
 
-    <mesh class="2f85" file="base_mount.stl"/>
-    <mesh class="2f85" file="base.stl"/>
-    <mesh class="2f85" file="driver.stl"/>
-    <mesh class="2f85" file="coupler.stl"/>
-    <mesh class="2f85" file="follower.stl"/>
-    <mesh class="2f85" file="pad.stl"/>
-    <mesh class="2f85" file="silicone_pad.stl"/>
-    <mesh class="2f85" file="spring_link.stl"/>
+    <mesh class="2f85" file="assets/base_mount.stl"/>
+    <mesh class="2f85" file="assets/base.stl"/>
+    <mesh class="2f85" file="assets/driver.stl"/>
+    <mesh class="2f85" file="assets/coupler.stl"/>
+    <mesh class="2f85" file="assets/follower.stl"/>
+    <mesh class="2f85" file="assets/pad.stl"/>
+    <mesh class="2f85" file="assets/silicone_pad.stl"/>
+    <mesh class="2f85" file="assets/spring_link.stl"/>
   </asset>
 
   <default>
