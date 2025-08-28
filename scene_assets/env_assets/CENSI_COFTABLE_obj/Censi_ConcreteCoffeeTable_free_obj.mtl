@@ -1,0 +1,44 @@
+# 3ds Max Wavefront OBJ Exporter v0.99 - (c)2007 guruware
+# File Created: 28.08.2023 14:04:15
+
+newmtl tabletop_concrete
+	Kd 0.4039 0.4000 0.3725
+	Ks 0.2980 0.2980 0.2980
+	Tr 0.0000
+	d 1.0000
+	Tf 1.0000 1.0000 1.0000
+	Pr 0.3000
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5200
+	Ke 0.0000 0.0000 0.0000
+	illum 2
+	map_Kd -s 2.0000 2.0000 1.0000 DIFF_CONCRETE.png
+	bump -bm 0.2000 -s 2.0000 2.0000 1.0000 NORM_CONCRETE.png
+	map_bump -bm 0.2000 -s 2.0000 2.0000 1.0000 NORM_CONCRETE.png
+
+newmtl metal_legs
+	Kd 0.0039 0.0039 0.0039
+	Ks 0.0200 0.0200 0.0200
+	Tr 0.0000
+	d 1.0000
+	Tf 1.0000 1.0000 1.0000
+	Pr 0.2500
+	Pm 0.0000
+	Pc 0.0000
+	Pcr 0.0000
+	Ni 1.5200
+	Ke 0.0000 0.0000 0.0000
+	illum 2
+	map_Kd -s 3.0000 3.0000 1.0000 DIFF_METAL.png
+
+newmtl wire_000000000
+	Ns 32
+	d 1
+	Tr 0
+	Tf 1 1 1
+	illum 2
+	Ka 0.0000 0.0000 0.0000
+	Kd 0.0000 0.0000 0.0000
+	Ks 0.3500 0.3500 0.3500

@@ -1,0 +1,10 @@
+# 文件名: Book_by_Peter_Iliev_obj.mtl
+# 用于 Book_by_Peter_Iliev_obj.obj 的材质文件，颜色为红色
+
+newmtl RedMaterial
+Ka 1.0 0.0 0.0      # 环境光 (Ambient) 红色
+Kd 1.0 0.0 0.0      # 漫反射 (Diffuse) 红色
+Ks 0.2 0.2 0.2      # 镜面反射 (Specular) 低反射
+Ns 10.0             # 高光系数
+d 1.0               # 不透明
+illum 2             # 使用高光模型
