@@ -1,0 +1,85 @@
+<mujoco model="objects_scene">
+  <option timestep="0.01" gravity="0 0 0"/>  <!-- 取消重力 -->
+  
+  <default>
+    <joint armature="0.1" damping="1" limited="true"/>
+    <geom conaffinity="0" condim="3" friction="1 0.1 0.1" rgba="0.8 0.6 0.4 1"/>
+  </default>
+  
+  <asset>
+    <!-- 导入实际模型文件 -->
+    <mesh name="coffee_cup_mesh" file="./scene_assets/living_room/Coffee_cup_withe_obj/Coffee_cup_withe_.obj"/>
+    <mesh name="yellow_barrier_mesh" file="./scene_assets/living_room/Cone_Buoy/conbyfr.obj"/>
+    <mesh name="book_mesh" file="./scene_assets/living_room/Book_by_Peter_Iliev_obj/Book_by_Peter_Iliev_obj.obj"/>
+    <mesh name="football_mesh" file="./scene_assets/living_room/soccer/Obj.obj"/>
+    <mesh name="basketball_mesh" file="./scene_assets/living_room/basketball/BasketBall.obj"/>
+    <mesh name="table_mesh" file="scene_assets/env_assets/CENSI_COFTABLE_obj/Censi_ConcreteCoffeeTable_free_obj.obj"/>
+    
+    <!-- 材质定义 -->
+    <material name="coffee_cup_mat" rgba="0.5 0.2 0.0 1"/>
+    <material name="yellow_barrier_mat" rgba="0.9 0.9 0.0 1"/>
+    <material name="book_mat" rgba="0.1 0.3 0.6 1"/>
+    <material name="football_mat" rgba="0.5 0.5 0.5 1"/>
+    <material name="basketball_mat" rgba="0.9 0.4 0.0 1"/>
+    <material name="table_mat" rgba="0.7 0.7 0.7 1"/>
+  </asset>
+  
+  <worldbody>
+    <!-- 咖啡杯 -->
+    <body name="coffee_cup" pos="0.6175566804667381 0.4018943018251386 0.31937398627448127">
+      <freejoint/>
+      <geom name="coffee_cup_geom" type="mesh" mesh="coffee_cup_mesh"
+            material="coffee_cup_mat" size="0.098"/>
+    </body>
+    
+    <!-- 黄色障碍物 -->
+    <body name="yellow_barrier" pos="0.05130502865257103 0.6606247730319297 0.31637398627448127">
+      <freejoint/>
+      <geom name="yellow_barrier_geom" type="mesh" mesh="yellow_barrier_mesh"
+            material="yellow_barrier_mat" size="0.092"/>
+    </body>
+    
+    <!-- 书本 -->
+    <body name="book" pos="0.06635277244501003 0.473959091311956 0.31437398627448127">
+      <freejoint/>
+      <geom name="book_geom" type="mesh" mesh="book_mesh"
+            material="book_mat" size="0.088"/>
+    </body>
+    
+    <!-- 足球1 -->
+    <body name="football1" pos="-0.3885905482642662 0.5489812188031324 0.4033183338783049">
+      <freejoint/>
+      <geom name="football1_geom" type="mesh" mesh="football_mesh"
+            material="football_mat" size="0.26588869520764724"/>
+    </body>
+    
+    <!-- 足球2 -->
+    <body name="football2" pos="-0.3900378037115135 0.8267650265556323 0.4148765651537514">
+      <freejoint/>
+      <geom name="football2_geom" type="mesh" mesh="football_mesh"
+            material="football_mat" size="0.2890051577585402"/>
+    </body>
+    
+    <!-- 篮球 -->
+    <body name="basketball" pos="-0.18117858987528535 0.19665202236078264 0.35448618047047975">
+      <freejoint/>
+      <geom name="basketball_geom" type="mesh" mesh="basketball_mesh"
+            material="basketball_mat" size="0.168224388391997"/>
+    </body>
+    
+    <!-- 桌子 -->
+    <body name="table" pos="0 0.75 -0.06662601372551874">
+      <freejoint/>
+      <geom name="table_geom" type="mesh" mesh="table_mesh"
+            material="table_mat" size="2"/>
+    </body>
+    
+    <!-- 地面 -->
+    <geom name="floor" type="plane" size="5 5 0.1" rgba="0.9 0.9 0.9 1" condim="1"/>
+  </worldbody>
+  
+  <actuator>
+    <!-- 如需添加控制器，可以在这里定义 -->
+  </actuator>
+</mujoco>
+    
