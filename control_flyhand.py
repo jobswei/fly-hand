@@ -115,86 +115,13 @@ class FlyingHandController:
                       y=self.trajectory['positions'][t, 1], 
                       z=self.trajectory['positions'][t, 2], 
                       direction=self.trajectory['directions'][t])
-            
-    def input_thread(self):
-        """Handle user input from terminal"""
-        print("\n=== Flying Hand Controller ===")
-        print("Commands:")
-        print("  p <x> <y> <z>     - Set position (meters)")
-        print("  r <roll> <pitch> <yaw> - Set rotation (degrees)")
-        print("  g <value>         - Set gripper (0-255, 0=open)")
-        print("  traj <type> [duration] - Start trajectory (circle/spiral/figure8/line/square)")
-        print("  stop              - Stop trajectory")
-        print("  pos               - Show current position")
-        print("  reset             - Reset to initial pose")
-        print("  q                 - Quit")
-        print("Examples:")
-        print("  p 0.2 0 0.6")
-        print("  traj circle 10")
-        print("  traj spiral")
-        print("=" * 30 + "\n")
-        
-        while self.running:
-            try:
-                cmd = input("> ").strip().lower().split()
-                if not cmd:
-                    continue
-                    
-                if cmd[0] == 'q':
-                    self.running = False
-                    
-                elif cmd[0] == 'p' and len(cmd) == 4:
-                    x, y, z = float(cmd[1]), float(cmd[2]), float(cmd[3])
-                    self.set_pose(x=x, y=y, z=z)
-                    print(f"Set position to ({x:.2f}, {y:.2f}, {z:.2f})")
-                    
-                elif cmd[0] == 'r' and len(cmd) == 4:
-                    roll, pitch, yaw = float(cmd[1]), float(cmd[2]), float(cmd[3])
-                    self.set_pose(roll=roll, pitch=pitch, yaw=yaw)
-                    print(f"Set rotation to ({roll:.1f}°, {pitch:.1f}°, {yaw:.1f}°)")
-                    
-                elif cmd[0] == 'g' and len(cmd) == 2:
-                    value = float(cmd[1])
-                    self.set_gripper(value)
-                    print(f"Set gripper to {value:.0f}")
-                    
-                elif cmd[0] == 'pos':
-                    euler_deg = np.rad2deg(self.target_euler)
-                    print(f"Position: ({self.target_pos[0]:.3f}, {self.target_pos[1]:.3f}, {self.target_pos[2]:.3f})")
-                    print(f"Rotation: ({euler_deg[0]:.1f}°, {euler_deg[1]:.1f}°, {euler_deg[2]:.1f}°)")
-                    print(f"Gripper: {self.gripper_value:.0f}")
-                    
-                elif cmd[0] == 'traj' and len(cmd) >= 2:
-                    traj_type = cmd[1]
-                    duration = float(cmd[2]) if len(cmd) > 2 else 10.0
-                    self.start_trajectory(traj_type, duration)
-                    
-                elif cmd[0] == 'stop':
-                    self.stop_trajectory()
-                    
-                elif cmd[0] == 'reset':
-                    self.stop_trajectory()
-                    self.set_pose(0, 0, 0.5, 0, 0, 0)
-                    self.set_gripper(0)
-                    print("Reset to initial pose")
-                    
-                else:
-                    print("Invalid command. Type 'q' to quit.")
-                    
-            except ValueError as e:
-                print(f"Error: Invalid number format")
-            except Exception as e:
-                print(f"Error: {e}")
     
     def run(self):
         """Main loop with viewer"""
         # Start input thread
-        input_thread = threading.Thread(target=self.input_thread, daemon=True)
-        input_thread.start()
-        
         # Set initial pose
         self.set_pose()
-        
+        self.start_trajectory('traj.pkl')
         with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
             while viewer.is_running() and self.running:
                 # Update trajectory if active
