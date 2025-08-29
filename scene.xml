@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <mujoco model="objects_scene">
-  <include file="robotiq_2f85/fly_hand.xml"/>
+  <include file="D:\files\codes\fly-hand\scene_assets\grippers\robotiq_2f85\fly_hand.xml"/>
   <option timestep="0.01" gravity="0 0 -9.81"/>
   <default>
     <joint armature="0.1" damping="1" limited="true"/>

@@ -1,0 +1,79 @@
+# config.yaml
+- asset: 2f85_base_mount
+  position: [0.0, 0.0, 0.007]  # 相对于世界坐标系的局部位置（父物体为World）
+  rotation: [0.0, 0.0, 0.0, 1.0]  # xyzw格式（Blender兼容），无旋转
+  size: -0.001  # STL模型缩放系数（毫米转米）
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA（不透明度1.0）
+
+- asset: 2f85_base
+  position: [0.0, 0.0, 0.0038]  # 相对于父物体base_mount的局部位置
+  rotation: [0.0, 0.0, -1.0, 1.0]  # 由MuJoCo原始quat="1 0 0 -1"（wxyz）转换为xyzw
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+
+- asset: 2f85_driver
+  position: [0.0, 0.0306011, 0.054904]  # 相对于父物体base的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.4627, 0.4627, 0.4627]  # 材质gray的RGBA
+- asset: 2f85_coupler
+  position: [0.0, 0.0315, -0.0041]  # 相对于父物体driver_right的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+- asset: 2f85_spring_link
+  position: [0.0, 0.0132, 0.0609]  # 相对于父物体base的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+- asset: 2f85_follower
+  position: [0.0, 0.055, 0.0375]  # 相对于父物体spring_link_right的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+
+- asset: 2f85_pad
+  position: [0.0, -0.0189, 0.01352]  # 相对于父物体follower_right的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.1882, 0.1882, 0.1882]  # 推荐材质silicone的RGBA（XML未显式指定）
+- asset: 2f85_silicone_pad
+  position: [0.0, 0.0, 0.0]  # 相对于父物体pad_right的局部位置（无偏移）
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+- asset: 2f85_driver
+  position: [0.0, -0.0306011, 0.054904]  # 相对于父物体base的局部位置
+  rotation: [0.0, 0.0, 1.0, 0.0]  # 由MuJoCo原始quat="0 0 0 1"（wxyz）转换为xyzw
+  size: -0.001
+  color: [0.4627, 0.4627, 0.4627]  # 材质gray的RGBA
+
+- asset: 2f85_coupler
+  position: [0.0, 0.0315, -0.0041]  # 相对于父物体driver_left的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+
+- asset: 2f85_spring_link
+  position: [0.0, -0.0132, 0.0609]  # 相对于父物体base的局部位置
+  rotation: [0.0, 0.0, 1.0, 0.0]  # 由MuJoCo原始quat="0 0 0 1"（wxyz）转换为xyzw
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+
+- asset: 2f85_follower
+  position: [0.0, 0.055, 0.0375]  # 相对于父物体spring_link_left的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA
+
+- asset: 2f85_pad
+  position: [0.0, -0.0189, 0.01352]  # 相对于父物体follower_left的局部位置
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.1882, 0.1882, 0.1882]  # 推荐材质silicone的RGBA
+
+- asset: 2f85_silicone_pad
+  position: [0.0, 0.0, 0.0]  # 相对于父物体pad_left的局部位置（无偏移）
+  rotation: [0.0, 0.0, 0.0, 1.0]  # 无旋转
+  size: -0.001
+  color: [0.149, 0.149, 0.149]  # 材质black的RGBA

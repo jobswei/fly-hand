@@ -251,7 +251,10 @@ class Renderer:
         constraint.up_axis = f'UP_{up_axis.upper()}'
 
     def _load_obj(self, path: str):
-        bpy.ops.wm.obj_import(filepath=path)
+        if path.lower().endswith('.obj'):
+            bpy.ops.wm.obj_import(filepath=path)
+        elif path.lower().endswith('.stl'):
+            bpy.ops.wm.stl_import(filepath=path)
         for obj in bpy.context.selected_objects[1:]:
             bpy.data.objects.remove(obj, do_unlink=True)
         return bpy.context.selected_objects[0]
@@ -287,7 +290,7 @@ class Renderer:
         size = [size] * 3 if keep_ratio else size
         bbox_size = [max_coordinate[i] - min_coordinate[i] for i in range(3)]
         base_size = [max(bbox_size)] * 3 if keep_ratio else bbox_size
-        obj.scale = [i / j for i, j in zip(size, base_size)]
+        obj.scale = [i / j if i > 0 else -i for i, j in zip(size, base_size)]
         bpy.ops.object.transform_apply(scale=True)
 
         # obj.rotation_euler = tuple(map(math.radians, (90,0,0)))
