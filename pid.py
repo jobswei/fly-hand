@@ -517,7 +517,7 @@ class FlyingHandController:
                                           i)
             body_names.append(body_name)
         mass = sum(self.model.body_mass[1:15])
-        pid = PIDPositionController3D(kp_pos=2.5,
+        pid = PIDPositionController3D(kp_pos=30,
                                       ki_pos=0.1,
                                       kd_pos=1.0,
                                       kp_vel=5.0,
@@ -536,17 +536,17 @@ class FlyingHandController:
             min_torque=-1.0  # 最小力矩限制
         )
         self.update_trajectory()
-        # target_position = self.get_current_pose()
-        target_position = (0.3, 0.5, 0.3)
+        target_position = self.get_current_pose()
+        # target_position = (0.3, 0.5, 0.3)
         target_rotation = (1, 0, 0, 0)  # No rotation (identity quaternion)
         with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
             while viewer.is_running() and self.running:
                 # Update trajectory if active
-                # if self.debug_step % 10 == 0:
-                #     target_position = self.get_current_pose()
+                if self.debug_step % 1 == 0:
+                    target_position = self.get_current_pose()
                 self.debug_step += 1
                 self.data.ctrl[self.gripper_actuator_id] = 255
-                print(self.data.xpos[1])
+                # print(self.data.qpos[self.qpos_addr:self.qpos_addr + 3])
                 output = pid.compute(
                     tuple(self.data.qpos[self.qpos_addr:self.qpos_addr + 3]),
                     target_position,
@@ -566,6 +566,11 @@ class FlyingHandController:
                 # self.data.ctrl[self.vx_id] = 0.0
                 # Step simulation
                 mujoco.mj_step(self.model, self.data)
+                print(
+                    np.linalg.norm(
+                        self.data.qpos[self.qpos_addr:self.qpos_addr + 3] -
+                        target_position) / np.linalg.norm(target_position))
+
                 # self.update_trajectory()
                 if self.render is not None and self.step % 10 == 0:
                     positions = self.data.xpos[1:]
