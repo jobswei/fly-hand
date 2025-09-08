@@ -51,8 +51,11 @@ class FlyingHandController:
         self.target_euler = np.array([0.0, 0.0,
                                       0.0])  # roll, pitch, yaw in radians
         self.gripper_value = 0.0  # 0: open, 255: closed
-
+        self.qpos_addr = self.model.jnt_qposadr[joint_id]
+        self.gripper_actuator_id = mujoco.mj_name2id(
+            self.model, mujoco.mjtObj.mjOBJ_ACTUATOR, "fingers_actuator")
         self.running = True
+        self.debug_step = 0
 
         # Trajectory tracking
         self.trajectory_mode = False
@@ -165,13 +168,18 @@ class FlyingHandController:
         # Set initial pose
         self.set_pose()
         self.start_trajectory('traj.pkl')
+        self.update_trajectory()
         with mujoco.viewer.launch_passive(self.model, self.data) as viewer:
             while viewer.is_running() and self.running:
                 # Update trajectory if active
-                self.update_trajectory()
+                # if self.debug_step > 100:
+                #     self.update_trajectory()
+                self.debug_step += 1
 
                 # Step simulation
                 mujoco.mj_step(self.model, self.data)
+                self.data.ctrl[self.gripper_actuator_id] = 255
+                # self.update_trajectory()
                 if self.render is not None and self.step % 10 == 0:
                     positions = self.data.xpos[1:]
                     quats = self.data.xquat[1:]
@@ -282,36 +290,36 @@ asset_paths = {
     "2f85_silicone_pad":
     "scene_assets/grippers/robotiq_2f85/assets/silicone_pad.stl"
 }
-render = Renderer(
-    [0, 4, 3],
-    60, [0, 0, 0],
-    has_wall=False,
-    plane_texture=
-    r"D:/files/codes/fly-hand/scene_assets/textures/rustic_floor.png",
-    wall_texture=r"D:/files/codes/fly-hand/scene_assets/textures/gray_wall.png"
-)
+# render = Renderer(
+#     [0, 4, 3],
+#     60, [0, 0, 0],
+#     has_wall=False,
+#     plane_texture=
+#     r"D:/files/codes/fly-hand/scene_assets/textures/rustic_floor.png",
+#     wall_texture=r"D:/files/codes/fly-hand/scene_assets/textures/gray_wall.png"
+# )
 
 # positions = [obj["position"] for obj in object_config["objects"]]
 # rotations = [obj["rotation"] for obj in object_config["objects"]]
 # render.render(positions, rotations, "test.png")
 
-griper_config = read_yaml("scene_assets/grippers/robotiq_2f85/config.yaml")
-positions = []
-rotations = []
-for config in griper_config:
-    render._setup_object(asset_path=asset_paths[config["asset"]],
-                         size=config["size"],
-                         color=config["color"])
-    positions.append(config["position"])
-    rot = Rotation.from_quat(config["rotation"])
-    euler_angles = rot.as_euler('xyz')
-    euler_degrees = np.rad2deg(euler_angles)
-    rotations.append(euler_degrees)
-for obj in object_config["objects"]:
-    render._setup_object(
-        asset_path=asset_paths[obj["asset"]],
-        size=obj["size"],
-    )
-controller = FlyingHandController('scene.xml', render)
+# griper_config = read_yaml("scene_assets/grippers/robotiq_2f85/config.yaml")
+# positions = []
+# rotations = []
+# for config in griper_config:
+#     render._setup_object(asset_path=asset_paths[config["asset"]],
+#                          size=config["size"],
+#                          color=config["color"])
+#     positions.append(config["position"])
+#     rot = Rotation.from_quat(config["rotation"])
+#     euler_angles = rot.as_euler('xyz')
+#     euler_degrees = np.rad2deg(euler_angles)
+#     rotations.append(euler_degrees)
+# for obj in object_config["objects"]:
+#     render._setup_object(
+#         asset_path=asset_paths[obj["asset"]],
+#         size=obj["size"],
+#     )
+controller = FlyingHandController('scene.xml', None)
 controller.run()
 # render.render(positions, rotations, "test.png")
