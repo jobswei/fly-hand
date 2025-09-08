@@ -1,5 +1,5 @@
 <mujoco model="robotiq_2f85">
-  <!-- <compiler angle="radian" meshdir="robotiq_2f85/assets" autolimits="true"/> -->
+  <compiler angle="radian"  autolimits="true"/>
 
   <option cone="elliptic" impratio="10"/>
 
@@ -148,14 +148,14 @@
     </body>
   </worldbody>
 
-  <!-- <contact>
+  <contact>
     <exclude body1="base" body2="left_driver"/>
     <exclude body1="base" body2="right_driver"/>
     <exclude body1="base" body2="left_spring_link"/>
     <exclude body1="base" body2="right_spring_link"/>
     <exclude body1="right_coupler" body2="right_follower"/>
     <exclude body1="left_coupler" body2="left_follower"/>
-  </contact> -->
+  </contact>
 
   <!--
     This adds stability to the model by having a tendon that distributes the forces between both
@@ -187,12 +187,12 @@
   -->
   <actuator>
     <!-- 6DOF motor control for flying hand -->
-    <motor name="fly_fx" joint="flying_hand_free" gear="1 0 0 0 0 0" ctrlrange="-10 10"/>
-    <motor name="fly_fy" joint="flying_hand_free" gear="0 1 0 0 0 0" ctrlrange="-10 10"/>
-    <motor name="fly_fz" joint="flying_hand_free" gear="0 0 1 0 0 0" ctrlrange="-10 100"/>
-    <motor name="fly_mx" joint="flying_hand_free" gear="0 0 0 1 0 0" ctrlrange="-1 1"/>
-    <motor name="fly_my" joint="flying_hand_free" gear="0 0 0 0 1 0" ctrlrange="-1 1"/>
-    <motor name="fly_mz" joint="flying_hand_free" gear="0 0 0 0 0 1" ctrlrange="-1 1"/>
+    <motor name="fx" joint="flying_hand_free" gear="1 0 0 0 0 0" ctrlrange="-10 10"/>
+    <motor name="fy" joint="flying_hand_free" gear="0 1 0 0 0 0" ctrlrange="-10 10"/>
+    <motor name="fz" joint="flying_hand_free" gear="0 0 1 0 0 0" ctrlrange="-10 30"/>
+    <motor name="mx" joint="flying_hand_free" gear="0 0 0 1 0 0" ctrlrange="-1 1"/>
+    <motor name="my" joint="flying_hand_free" gear="0 0 0 0 1 0" ctrlrange="-1 1"/>
+    <motor name="mz" joint="flying_hand_free" gear="0 0 0 0 0 1" ctrlrange="-1 1"/>
     
     <!-- Gripper control -->
     <general class="2f85" name="fingers_actuator" tendon="split" forcerange="-5 5" ctrlrange="0 255"

@@ -10,13 +10,13 @@
     <mesh name="coffee_cup_1_mesh" file="./scene_assets/living_room/Coffee_cup_withe_obj/Coffee_cup_withe_.obj" scale="0.007422076527364894 0.007422076527364894 0.007422076527364894"/>
     <mesh name="yellow_barrier_1_mesh" file="./scene_assets/living_room/Cone_Buoy/conbyfr.obj" scale="0.01921124877084551 0.01921124877084551 0.01921124877084551"/>
     <mesh name="book_1_mesh" file="./scene_assets/living_room/Book_by_Peter_Iliev_obj/Book_by_Peter_Iliev_obj.obj" scale="0.00561388502597602 0.00561388502597602 0.00561388502597602"/>
-    <mesh name="football_1_mesh" file="./scene_assets/living_room/soccer/Obj.obj" scale="0.1373363645418727 0.1373363645418727 0.1373363645418727"/>
+    <mesh name="football_1_mesh" file="./scene_assets/living_room/soccer/Obj.obj" scale="0.03 0.03 0.03"/>
     <mesh name="football_2_mesh" file="./scene_assets/living_room/soccer/Obj.obj" scale="0.1492764394116548 0.1492764394116548 0.1492764394116548"/>
     <mesh name="basketball_1_mesh" file="./scene_assets/living_room/basketball/BasketBall.obj" scale="0.06932219904619437 0.06932219904619437 0.06932219904619437"/>
     <mesh name="table_1_mesh" file="scene_assets/env_assets/CENSI_COFTABLE_obj/Censi_ConcreteCoffeeTable_free_obj.obj" scale="0.1680672268907563 0.1680672268907563 0.1680672268907563"/>
   </asset>
   <worldbody>
-    <body name="coffee_cup_1" pos="0.6175566804667381 0.4018943018251386 0.31937398627448127" euler="90 0 0">
+    <!-- <body name="coffee_cup_1" pos="0.6175566804667381 0.4018943018251386 0.31937398627448127" euler="90 0 0">
       <joint type="free" damping="1"/>
       <geom name="coffee_cup_1_geom" type="mesh" mesh="coffee_cup_1_mesh"/>
     </body>
@@ -27,19 +27,19 @@
     <body name="book_1" pos="0.06635277244501003 0.473959091311956 0.31437398627448127" euler="90 0 0">
       <joint type="free" damping="1"/>
       <geom name="book_1_geom" type="mesh" mesh="book_1_mesh"/>
-    </body>
-    <body name="football_1" pos="-0.3885905482642662 0.5489812188031324 0.4033183338783049" euler="90 0 0">
+    </body> -->
+    <body name="football_1" pos="0 0 1.1" euler="0 0 0">
       <joint type="free" damping="1"/>
       <geom name="football_1_geom" type="mesh" mesh="football_1_mesh"/>
     </body>
-    <body name="football_2" pos="-0.3900378037115135 0.8267650265556323 0.4148765651537514" euler="90 0 0">
+    <!-- <body name="football_2" pos="-0.3900378037115135 0.8267650265556323 0.4148765651537514" euler="90 0 0">
       <joint type="free" damping="1"/>
       <geom name="football_2_geom" type="mesh" mesh="football_2_mesh"/>
     </body>
     <body name="basketball_1" pos="-0.18117858987528535 0.19665202236078264 0.35448618047047975" euler="90 0 0">
       <joint type="free" damping="1"/>
       <geom name="basketball_1_geom" type="mesh" mesh="basketball_1_mesh"/>
-    </body>
+    </body> -->
     <body name="table_1" pos="0 0.75 -0.06662601372551874" euler="90 0 0">
       <!-- <joint type="free" damping="1"/> -->
       <geom name="table_1_geom" type="mesh" mesh="table_1_mesh"/>
