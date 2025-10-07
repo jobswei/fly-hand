@@ -1,7 +1,7 @@
 <?xml version="1.0" ?>
 <mujoco model="objects_scene">
-  <include file="D:\files\codes\fly-hand\scene_assets\grippers\robotiq_2f85\fly_hand.xml"/>
-  <option timestep="0.01" gravity="0 0 -9.81"/>
+  <include file="E:\About_coding\fly_hand\scene_assets\grippers\robotiq_2f85\fly_hand.xml"/>
+  <option timestep="0.01" gravity="0 0 0"/>
   <default>
     <joint armature="0.1" damping="1" limited="true"/>
     <geom conaffinity="1" condim="3" friction="1 0.1 0.1" density="1000" margin="0.002"/>
