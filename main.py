@@ -312,6 +312,6 @@ for obj in object_config["objects"]:
         asset_path=asset_paths[obj["asset"]],
         size=obj["size"],
     )
-controller = FlyingHandController('scene.xml', render)
+controller = FlyingHandController('scene.xml', None)
 controller.run()
 # render.render(positions, rotations, "test.png")
