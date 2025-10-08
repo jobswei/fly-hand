@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <mujoco model="objects_scene">
-  <include file="D:\files\codes\fly-hand\scene_assets\grippers\arx_x5\fly_hand.xml"/>
+  <include file="E:\About_coding\fly_hand\scene_assets\grippers\arx_x5\fly_hand.xml"/>
   <option timestep="0.01" gravity="0 0 0"/>
   <default>
     <joint armature="0.1" damping="1" limited="true"/>
