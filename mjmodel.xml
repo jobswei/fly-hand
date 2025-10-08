@@ -1,0 +1,87 @@
+<mujoco model="objects_scene">
+  <compiler angle="radian"/>
+
+  <option timestep="0.01" gravity="0 0 0"/>
+
+  <default>
+    <joint limited="true" armature="0.1" damping="1"/>
+    <geom friction="1 0.1 0.1" margin="0.002"/>
+    <default class="robot">
+      <joint limited="auto" armature="0" damping="0"/>
+      <geom friction="1 0.005 0.0001" margin="0"/>
+      <default class="motor"/>
+      <default class="visual">
+        <geom contype="0" conaffinity="0" group="2" material="black"/>
+      </default>
+      <default class="collision">
+        <geom contype="0" group="1" priority="1" friction="1 0.01 0.01" solref="0.005" solimp="0.99 0.999 1e-05" material="collision_material"/>
+      </default>
+    </default>
+  </default>
+
+  <asset>
+    <material name="black"/>
+    <material name="default_material" rgba="0.7 0.7 0.7 1"/>
+    <material name="collision_material" rgba="1 0.28 0.1 0.9"/>
+    <mesh name="link1.stl" content_type="model/stl" file="D:\files/codes/fly-hand/scene_assets/grippers/arx_x5/meshes/link1.stl"/>
+    <mesh name="link2.stl" content_type="model/stl" file="D:\files/codes/fly-hand/scene_assets/grippers/arx_x5/meshes/link2.stl"/>
+    <mesh name="link3.stl" content_type="model/stl" file="D:\files/codes/fly-hand/scene_assets/grippers/arx_x5/meshes/link3.stl"/>
+    <mesh name="coffee_cup_1_mesh" content_type="model/obj" file="scene_assets/living_room/Coffee_cup_withe_obj/Coffee_cup_withe_.obj" scale="0.00742208 0.00742208 0.00742208"/>
+    <mesh name="yellow_barrier_1_mesh" content_type="model/obj" file="scene_assets/living_room/Cone_Buoy/conbyfr.obj" scale="0.0192112 0.0192112 0.0192112"/>
+    <mesh name="book_1_mesh" content_type="model/obj" file="scene_assets/living_room/Book_by_Peter_Iliev_obj/Book_by_Peter_Iliev_obj.obj" scale="0.00561389 0.00561389 0.00561389"/>
+    <mesh name="football_1_mesh" content_type="model/obj" file="scene_assets/living_room/soccer/Obj.obj" scale="0.03 0.03 0.03"/>
+    <mesh name="football_2_mesh" content_type="model/obj" file="scene_assets/living_room/soccer/Obj.obj" scale="0.149276 0.149276 0.149276"/>
+    <mesh name="basketball_1_mesh" content_type="model/obj" file="scene_assets/living_room/basketball/BasketBall.obj" scale="0.0693222 0.0693222 0.0693222"/>
+    <mesh name="table_1_mesh" content_type="model/obj" file="scene_assets/env_assets/CENSI_COFTABLE_obj/Censi_ConcreteCoffeeTable_free_obj.obj" scale="0.168067 0.168067 0.168067"/>
+  </asset>
+
+  <worldbody>
+    <geom name="floor" size="5 5 0.1" type="plane" density="0" rgba="0.9 0.9 0.9 1"/>
+    <body name="link1" pos="0.02895 0 0.5" quat="0.5 0.5 -0.5 0.5">
+      <inertial pos="0.041697 2.4368e-05 0.00014464" mass="0.44089" diaginertia="0.00038 0.00028 0.0005"/>
+      <joint name="flying_hand_free" type="free" armature="0" damping="0"/>
+      <geom name="link1_collision" class="collision" type="mesh" mesh="link1.stl"/>
+      <geom name="link1_visual" class="visual" type="mesh" mesh="link1.stl"/>
+      <body name="link2" pos="0.08657 0.024896 -0.0002436">
+        <inertial pos="-0.00035522 -0.007827 -0.0029883" mass="0.064798" diaginertia="2e-05 3e-05 3e-05"/>
+        <joint name="left_driver_joint" class="motor" pos="0 0 0" axis="0 1 0" type="slide" range="0 0.044"/>
+        <geom name="link2_collision" class="collision" type="mesh" mesh="link2.stl"/>
+        <geom name="link2_visual" class="visual" type="mesh" mesh="link2.stl"/>
+      </body>
+      <body name="link3" pos="0.08657 -0.0249 -0.00024366">
+        <inertial pos="-0.00035522 0.0078277 0.0024201" mass="0.064798" diaginertia="2e-05 3e-05 3e-05"/>
+        <joint name="right_driver_joint" class="motor" pos="0 0 0" axis="0 -1 0" type="slide" range="0 0.044"/>
+        <geom name="link3_collision" class="collision" type="mesh" mesh="link3.stl"/>
+        <geom name="link3_visual" class="visual" type="mesh" mesh="link3.stl"/>
+      </body>
+    </body>
+    <body name="football_1" pos="0 0 1.1">
+      <joint type="free"/>
+      <geom name="football_1_geom" type="mesh" mesh="football_1_mesh"/>
+    </body>
+    <body name="table_1" pos="0 0.75 -0.066626" quat="0.525322 0.850904 0 0">
+      <geom name="table_1_geom" type="mesh" mesh="table_1_mesh"/>
+    </body>
+  </worldbody>
+
+  <equality>
+    <joint joint1="left_driver_joint" joint2="right_driver_joint" polycoef="0 1 0 0 0" solref="0.005" solimp="0.95 0.99"/>
+  </equality>
+
+  <tendon>
+    <fixed name="split">
+      <joint joint="left_driver_joint" coef="0.5"/>
+      <joint joint="right_driver_joint" coef="0.5"/>
+    </fixed>
+  </tendon>
+
+  <actuator>
+    <general name="fx" joint="flying_hand_free" ctrlrange="-10 10"/>
+    <general name="fy" joint="flying_hand_free" ctrlrange="-10 10" gear="0 1 0 0 0 0"/>
+    <general name="fz" joint="flying_hand_free" ctrlrange="-10 30" gear="0 0 1 0 0 0"/>
+    <general name="mx" joint="flying_hand_free" ctrlrange="-1 1" gear="0 0 0 1 0 0"/>
+    <general name="my" joint="flying_hand_free" ctrlrange="-1 1" gear="0 0 0 0 1 0"/>
+    <general name="mz" joint="flying_hand_free" ctrlrange="-1 1" gear="0 0 0 0 0 1"/>
+    <general name="fingers_actuator" tendon="split" ctrlrange="0 255" forcerange="-5 5" gainprm="0.313725" biasprm="-255 -100 -10"/>
+  </actuator>
+</mujoco>
