@@ -26,18 +26,18 @@
 
   <worldbody>
     <body name="link1" pos="0 0 0" quat="1 0 0 0">
-      <freejoint name="flying_hand_free"/>
+      <joint name="flying_hand_free" type="free" damping="10"/>
       <inertial pos="-2.4368E-05 -1.4464E-04 4.1697E-02" quat="0.5 0.5 -0.5 0.5" mass="0.44089" diaginertia="0.00038 0.00028 0.0005" />
       <geom name="link1_collision" type="mesh" mesh="link1.stl" class="collision" />
       <geom name="link1_visual" material="black" type="mesh" mesh="link1.stl" class="visual" />
       <body name="link2" pos="-0.07 0.0002436 0.08657" quat="0.5 0.5 -0.5 0.5">
-        <joint name="left_driver_joint" type="slide" ref="0.0" class="motor" range="0 0.03" axis="0 -1 0" />
+        <joint name="left_driver_joint" type="slide" ref="0.0" class="motor" range="0 0.036" axis="0 -1 0" />
         <inertial pos="-0.00035522 -0.007827 -0.0029883" quat="1.0 0.0 0.0 0.0" mass="0.064798" diaginertia="2e-05 3e-05 3e-05" />
         <geom name="link2_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh" mesh="link2.stl" class="collision" />
         <geom name="link2_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="mesh" mesh="link2.stl" class="visual" />
       </body>
       <body name="link3" pos="0.07 0.00024366 0.08657" quat="0.5 0.5 -0.5 0.5">
-        <joint name="right_driver_joint" type="slide" ref="0.0" class="motor" range="0 0.03" axis="0 1 0" />
+        <joint name="right_driver_joint" type="slide" ref="0.0" class="motor" range="0 0.036" axis="0 1 0" />
         <inertial pos="-0.00035522 0.0078277 0.0024201" quat="1.0 0.0 0.0 0.0" mass="0.064798" diaginertia="2e-05 3e-05 3e-05" />
         <geom name="link3_collision" pos="0 0 0" quat="1.0 0.0 0.0 0.0" type="mesh" mesh="link3.stl" class="collision" />
         <geom name="link3_visual" pos="0 0 0" quat="1.0 0.0 0.0 0.0" material="black" type="mesh" mesh="link3.stl" class="visual" />
@@ -60,6 +60,7 @@
   <contact>
     <exclude body1="link1" body2="link2" />
     <exclude body1="link1" body2="link3" />
+    <!-- <exclude body1="link2" body2="link3" /> -->
   </contact>
 
   <actuator>
@@ -72,7 +73,7 @@
     <motor name="mz" joint="flying_hand_free" gear="0 0 0 0 0 10" ctrlrange="-10 10"/>
     
     <!-- Gripper control -->
-    <general name="fingers_actuator" tendon="split" forcerange="-20 50" ctrlrange="-128 255"
+    <general name="fingers_actuator" tendon="split" forcerange="-5 20" ctrlrange="-5 10"
       gainprm="2 0 0" biasprm="0 0 -10"/>
   </actuator>
 </mujoco>
